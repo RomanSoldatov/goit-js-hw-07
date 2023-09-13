@@ -16,38 +16,10 @@ function createMarkup(arr) {
     .join("");
 }
 
-list.addEventListener("click", handleClick);
-let lightbox;
-function handleClick(event) {
-  event.preventDefault();
-
-  if (event.target.classList.contains("gallery__image")) {
-    const index = galleryItems.findIndex(
-      (item) => item.original === event.target.parentElement.href
-    );
-
-    if (!lightbox) {
-      lightbox = new SimpleLightbox(".gallery a", {
-        captionsData: "alt",
-        captionDelay: 250,
-      });
-    }
-
-    lightbox.open(index);
-  }
-}
-
-document.addEventListener("keydown", onKeyPress);
-
-function onKeyPress(event) {
-  if (event.key === "ArrowLeft" && lightbox) {
-    lightbox.prev();
-  } else if (event.key === "ArrowRight" && lightbox) {
-    lightbox.next();
-  } else if (event.key === "Escape" && lightbox) {
-    lightbox.close();
-  }
-}
+new SimpleLightbox(".gallery a", {
+  captionsData: "alt",
+  captionDelay: 250,
+});
 
 console.log(galleryItems);
 

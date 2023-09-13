@@ -3,6 +3,7 @@ import { galleryItems } from "./gallery-items.js";
 const list = document.querySelector(".gallery");
 list.insertAdjacentHTML("beforeend", createMarkup(galleryItems));
 list.addEventListener("click", handleClick);
+let instance;
 
 function createMarkup(arr) {
   return arr
@@ -25,17 +26,14 @@ function createMarkup(arr) {
 
 function handleClick(event) {
   event.preventDefault();
-
   if (event.target === event.currentTarget) {
     return;
   }
-
   const currentImg = event.target.closest(".gallery__item");
   const index = currentImg.dataset.index;
-  const instance = basicLightbox.create(
+  instance = basicLightbox.create(
     `<div class="modal"><img src="${galleryItems[index].original}" alt="${galleryItems[index].description}" class="gallery__image" /></div>`
   );
-
   instance.show();
 }
 
@@ -45,7 +43,7 @@ function handleKeyDown(event) {
   if (event.code === "Escape") {
     const openModal = document.querySelector(".modal");
     if (openModal) {
-      openModal.parentElement.remove();
+      instance.close();
     }
   }
 }
