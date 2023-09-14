@@ -33,10 +33,10 @@ function handleClick(event) {
   const instance = basicLightbox.create(
     `<div class="modal"><img src="${galleryItems[index].original}" alt="${galleryItems[index].description}" class="gallery__image" /></div>`,
     {
-      onShow: (instance) => {
+      onShow: () => {
         window.addEventListener("keydown", onEscKeyPress);
       },
-      onClose: (instance) => {
+      onClose: () => {
         window.removeEventListener("keydown", onEscKeyPress);
       },
     }
